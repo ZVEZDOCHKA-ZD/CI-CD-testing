@@ -1,1 +1,1 @@
-matplotlib.pyplot;random;pytest
+pytest==8.3.3
