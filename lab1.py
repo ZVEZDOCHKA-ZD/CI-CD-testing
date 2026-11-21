@@ -5,7 +5,6 @@ import argparse
 
 
 def build_grid(B=100):
-    """Равномерная сетка [0, 1/B, ..., (B-1)/B]."""
     return [n / B for n in range(B)]
 
 
@@ -26,13 +25,11 @@ def generate_uniform_sample(A, rng=None, method="lottery", k=None):
     if k is None:
         k = n
 
-    # Случайная перестановка
     if method == "random":
         idx = list(range(n))
         rng.shuffle(idx)
         return [work[i] for i in idx[:k]]
 
-    # Стратифицированная выборка: по одной точке из каждой страты
     if method == "stratified":
         ordered = sorted(work)
         strata = [[] for _ in range(max(k, 1))]
@@ -149,7 +146,6 @@ def main(argv=None):
         chi2_total = sum((c - expected) ** 2 / expected for c in total_counts)
 
         df = max(args.bins - 1, 1)
-        # грубая верхняя оценка квантиля ~95% без scipy
         critical = df + 2.0 * (2.0 * df) ** 0.5
 
         avg_chi2 = sum(chi2_per_run) / len(chi2_per_run)
