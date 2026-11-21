@@ -28,3 +28,13 @@ jobs:
         
       - name: Run lab1.py
         run: python lab1.py
+  auto-merge:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' # Срабатывает только для PR
+    steps:
+      - name: Enable auto-merge
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
