@@ -1,7 +1,7 @@
 # lab1.py
 import matplotlib.pyplot as plt
 import random
-
+import argparse
 
 def build_grid(B=100):
     """Равномерная сетка [0, 1/B, ..., (B-1)/B]."""
@@ -39,7 +39,15 @@ def plot_histogram(C, bins=20):
     plt.title("Гистограмма равномерного распределения")
 
 
-def main():
+def main(argv=None):
+    p = argparse.ArgumentParser()
+    p.add_argument("-B", type=int, default=100)
+    p.add_argument("--seed", type=int, default=None)
+    p.add_argument("--bins", type=int, default=20)
+    p.add_argument("--runs", type=int, default=1, help="число прогонов")
+    args = p.parse_args(argv)
+
+    rng = random.Random(args.seed)
     A = build_grid(100)
     C = generate_uniform_sample(A)
     plot_histogram(C)
