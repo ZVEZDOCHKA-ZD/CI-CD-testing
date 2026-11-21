@@ -4,7 +4,6 @@ import random
 import argparse
 
 def build_grid(B=100):
-    """Равномерная сетка [0, 1/B, ..., (B-1)/B]."""
     return [n / B for n in range(B)]
 
 
