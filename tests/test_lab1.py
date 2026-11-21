@@ -64,5 +64,5 @@ def test_main_runs_and_calls_show(monkeypatch):
         called["show"] = True
 
     monkeypatch.setattr("matplotlib.pyplot.show", fake_show)
-    lab1.main()
+    lab1.main([])
     assert called.get("show") is True
